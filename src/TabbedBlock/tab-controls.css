@@ -1,7 +1,12 @@
-.controls-bar {
-    
+.controls-bar-false {
+    opacity: 0;
+    transition: opacity .5s;
 }
 
+.controls-bar-true {
+    opacity: 1;
+    transition: opacity .5s;
+}
 
 .tabbed-block-header-controls {
     position: absolute;

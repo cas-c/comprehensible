@@ -15,9 +15,15 @@ class TabbedBlock extends React.Component {
         super(props);
         this.state = {
             active: 0,
-            maxRightScroll: MAGIC_NUMBER * props.data.headers.length,
-            leftScroll: 0
+            rightBorder: MAGIC_NUMBER * props.data.headers.length,
+            maxRightBorder: MAGIC_NUMBER * props.data.headers.length,
+            leftScroll: 0,
+            moused: false
         };
+    }
+
+    componentDidMount() {
+        this.headerRef.scroll({ left: 0 });
     }
 
     makeActive = i => {
@@ -39,13 +45,18 @@ class TabbedBlock extends React.Component {
         let amountToScroll;
         if (direction === 'right') amountToScroll = (MAGIC_NUMBER * space) + currentScroll;
         if (direction === 'left') amountToScroll = -(MAGIC_NUMBER * space) + currentScroll;
+        if (direction === 'left' && amountToScroll < MAGIC_NUMBER) amountToScroll = 0;
         // Actual scrolling function.
         this.headerRef.scroll({ left: amountToScroll, behavior: 'smooth' });
-        this.setState({ leftScroll: amountToScroll });
+        this.setState({ leftScroll: amountToScroll, rightBorder: this.state.maxRightBorder - space * MAGIC_NUMBER});
     }
 
     mouseOverControls = () => {
-        console.log('mouseover');
+        this.setState({ moused: true });
+    }
+
+    mouseExitControls = () => {
+        this.setState({ moused: false });
     }
 
     render() {
@@ -58,6 +69,7 @@ class TabbedBlock extends React.Component {
                                 ref={hwrap => this.hwrapper = hwrap}
                                 className='tabbed-block-header-wrapper'
                                 onMouseOver={this.mouseOverControls}
+                                onMouseLeave={this.mouseExitControls}
                             >
                                 <TabbedBlockHeader
                                     data={this.props.data.headers}
@@ -65,7 +77,7 @@ class TabbedBlock extends React.Component {
                                     activate={this.makeActive}
                                     getBlockHeaderRef={this.getHeaderRef}
                                 />
-                                <TabControls left={this.state.leftScroll} right={this.state.maxRightScroll} scroll={this.scrollHeader}/>
+                                <TabControls display={this.state.moused} left={this.state.leftScroll} right={this.state.rightBorder} scroll={this.scrollHeader}/>
                             </div>
                             <TabbedBlockBody data={this.props.data.content} active={this.state.active} />
                         </div>
