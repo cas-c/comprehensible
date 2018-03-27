@@ -126,6 +126,8 @@
     opacity: 1;
     padding: 2rem 3rem 3.5rem;
     box-sizing: border-box;
+    text-align: justify;
+    line-height: 2em;
 }
 
 .tabbed-block-content-animation-enter {
@@ -146,4 +148,5 @@
 .tabbed-block-content-image {
     padding: 2em;
     max-width: 40%;
+    margin-left: 27%;
 }
