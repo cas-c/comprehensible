@@ -3,6 +3,8 @@ import TabbedBlock from './TabbedBlock';
 import logo from './logo.svg';
 import './App.css';
 
+import tabData from './tabData';
+
 class App extends Component {
     render() {
         return (
@@ -12,7 +14,7 @@ class App extends Component {
                     <h1 className="App-title">Tabbed Block showcase</h1>
                 </header>
                 <div className="App-intro">
-                    <TabbedBlock />
+                    <TabbedBlock data={tabData} />
                 </div>
             </div>
         );

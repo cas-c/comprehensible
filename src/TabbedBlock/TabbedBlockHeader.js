@@ -1,23 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const TabbedBlockHeader = () => (
+const TabbedBlockHeader = ({ data, active, activate }) => (
     <div className='tabbed-block-header'>
-        <a className='tabbed-block-header-item'>
-            Embracing Discovery
-        </a>
-        <a className='tabbed-block-header-item'>
-            Gaining Insight
-        </a>
-        <a className='tabbed-block-header-item'>
-            Making It Real
-        </a>
-        <a className='tabbed-block-header-item'>
-            Love The Work
-        </a>
-        <a className='tabbed-block-header-item'>
-            Have Fun
-        </a>
+        {
+            data.map((d, i) => (
+                <a 
+                key={`d${d.index}`}
+                onClick={() => activate(i)}
+                className={`tabbed-block-header-item${active === i ? '-active' : ''}`}>
+                    {d.name}
+                </a>
+            ))
+        }
     </div>
 );
+
+
+TabbedBlockHeader.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.shape({
+        index: PropTypes.number,
+        name: PropTypes.string
+    })),
+    active: PropTypes.number,
+    activate: PropTypes.func
+}
 
 export default TabbedBlockHeader;

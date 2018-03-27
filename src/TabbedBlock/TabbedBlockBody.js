@@ -1,20 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const TabbedBlockBody = () => (
+import TabbedBlockContent from './TabbedBlockContent';
+
+const TabbedBlockBody = ({ data, active }) => (
     <div className='tabbed-block-body'>
-        <div className='tabbed-block-content'>
-            This is where the content goes. <br />
-            This is where the content goes. <br />
-            This is where the content goes. <br />
-            This is where the content goes. <br />
-            This is where the content goes. <br />
-            This is where the content goes. <br />
-            This is where the content goes. <br />
-            This is where the content goes. <br />
-            This is where the content goes. <br />
-            This is where the content goes. <br />
-        </div>
+        <TabbedBlockContent data={data.find(d => d.header === active)} />
     </div>
 );
+
+TabbedBlockBody.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.shape({
+        header: PropTypes.number,
+        content: PropTypes.any
+    }))
+}
 
 export default TabbedBlockBody;
