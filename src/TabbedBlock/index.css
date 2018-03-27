@@ -102,3 +102,12 @@
     padding: 2rem 3rem 3.5rem;
     box-sizing: border-box;
 }
+
+.tabbed-block-content-animation-enter {
+  opacity: 0.01;
+}
+
+.tabbed-block-content-animation-enter.tabbed-block-content-animation-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
