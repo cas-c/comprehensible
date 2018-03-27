@@ -23,6 +23,9 @@
     transition: opacity .3s;
     z-index: 1;
     color: #fff;
+    cursor: -moz-pointer; 
+    cursor: -webkit-pointer; 
+    cursor: pointer;
 }
 
 .controls-left {

@@ -92,6 +92,9 @@
     letter-spacing: .12em;
     font-weight: 700;
     line-height: 1.66667;
+    cursor: -moz-pointer; 
+    cursor: -webkit-pointer; 
+    cursor: pointer;
 }
 
 .tabbed-block-header-item-active {
@@ -104,6 +107,7 @@
     flex: 0 1 100%;
     height: 1.5rem;
     border-right: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
     color: rgb(116, 122, 126);
     background: #fff;
     font-size: .9rem;
