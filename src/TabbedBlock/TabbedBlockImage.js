@@ -20,7 +20,7 @@ class TabbedBlockImage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='tabbed-block-content-image-wrapper'>
                 <img onClick={this.open} className='tabbed-block-content-image' src={this.props.src} alt=''/>
                 {
                     this.state.open &&

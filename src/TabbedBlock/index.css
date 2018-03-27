@@ -137,6 +137,12 @@
   transition: opacity 300ms ease-in;
 }
 
+.tabbed-block-content-image-wrapper {
+    cursor: -moz-zoom-in; 
+    cursor: -webkit-zoom-in; 
+    cursor: zoom-in;
+}
+
 .tabbed-block-content-image {
     padding: 2em;
     max-width: 40%;
