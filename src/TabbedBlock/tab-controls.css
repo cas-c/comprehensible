@@ -19,9 +19,10 @@
     padding: 1rem;
     min-width: 2rem;
     border-radius: .3rem;
-    background: #50abf1;
+    background: #555;
     transition: opacity .3s;
     z-index: 1;
+    color: #fff;
 }
 
 .controls-left {

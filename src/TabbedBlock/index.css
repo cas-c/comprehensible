@@ -136,3 +136,8 @@
   opacity: 1;
   transition: opacity 300ms ease-in;
 }
+
+.tabbed-block-content-image {
+    padding: 2em;
+    max-width: 40%;
+}
