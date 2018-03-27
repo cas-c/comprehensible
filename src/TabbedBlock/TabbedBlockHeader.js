@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TabbedBlockHeader = ({ data, active, activate }) => (
-    <div className='tabbed-block-header'>
+const TabbedBlockHeader = ({ data, active, activate, getBlockHeaderRef }) => (
+    <div
+        ref={getBlockHeaderRef}
+        className='tabbed-block-header'
+    >
         {
             data.map((d, i) => (
                 <a 
@@ -23,7 +26,8 @@ TabbedBlockHeader.propTypes = {
         name: PropTypes.string
     })),
     active: PropTypes.number,
-    activate: PropTypes.func
+    activate: PropTypes.func,
+    getBlockHeaderRef: PropTypes.func
 }
 
 export default TabbedBlockHeader;

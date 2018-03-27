@@ -1,0 +1,28 @@
+.controls-bar {
+    
+}
+
+
+.tabbed-block-header-controls {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    top: .6rem;
+    padding: 1rem;
+    min-width: 2rem;
+    border-radius: .3rem;
+    background: #50abf1;
+    transition: opacity .3s;
+    z-index: 1;
+}
+
+.controls-left {
+    left: .9rem;
+}
+
+.controls-right {
+    right: .9rem;
+}
