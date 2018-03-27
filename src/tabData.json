@@ -41,13 +41,13 @@
         },
         {
             "header": 1,
-            "text": "1 This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />",
-            "image": null
+            "text": "Here we have an image displayed underneath our text. <br />",
+            "image": "https://i.imgur.com/KoiWXY3.gif"
         },
         {
             "header": 2,
-            "text": "2 This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />This is where the content goes. <br />",
-            "image": null
+            "text": "",
+            "image": "https://i.imgur.com/9RBewwM.gif"
         },
         {
             "header": 3,
