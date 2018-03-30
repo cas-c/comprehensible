@@ -2,16 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TabbedBlockHeader = ({ data, active, activate, getBlockHeaderRef }) => (
-    <div
-        ref={getBlockHeaderRef}
-        className='tabbed-block-header'
-    >
+    <div className='tabbed-block-header' ref={getBlockHeaderRef}>
         {
             data.map((d, i) => (
                 <a 
-                key={`d${d.index}`}
-                onClick={() => activate(i)}
-                className={`tabbed-block-header-item${active === i ? '-active' : ''}`}>
+                    key={`d${d.index}`}
+                    onClick={() => activate(i)}
+                    className={`tabbed-block-header-item ${active === i ? 'tabbed-block-header-item-active' : ''}`}
+                >
                     {d.name}
                 </a>
             ))

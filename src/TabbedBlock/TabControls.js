@@ -4,6 +4,8 @@ import './tab-controls.css';
 
 const TabControls = ({ left, right, scroll, display }) => (
     <div className={`controls-bar controls-bar-${display}`}>
+    { console.log(left) }
+    { console.log(right) }
         { 
             left > 0 &&
                 <div

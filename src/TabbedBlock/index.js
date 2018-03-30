@@ -1,55 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import './index.css';
-
 import TabbedBlockHeader from './TabbedBlockHeader';
-import TabbedBlockBody from './TabbedBlockBody';
 import TabControls from './TabControls';
+import TabbedBlockBody from './TabbedBlockBody';
 
-//todo: find out how to find this programmatically
-const MAGIC_NUMBER = 280;
-
+const minus = (x, y) => x - y;
+const plus = (x, y) => x + y;
+const move = (dir, x, y) => dir === 'left' ? minus(x, y) : plus(x, y);
 
 class TabbedBlock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             active: 0,
-            rightBorder: MAGIC_NUMBER * props.data.headers.length,
-            maxRightBorder: MAGIC_NUMBER * props.data.headers.length,
+            mouse: false,
             leftScroll: 0,
-            moused: false
+            rightMax: 0
         };
     }
 
     componentDidMount() {
         this.headerRef.scroll({ left: 0 });
+        this.setState({ rightMax: this.headerRef.scrollWidth - this.headerRef.clientWidth });
+    }
+
+    getHeaderRef = i => {
+        this.headerRef = i;
     }
 
     makeActive = i => {
         if (this.state.active === i) return;
         this.setState({ active: i });
     };
-
-    getHeaderRef = i => {
-        this.headerRef = i;
-    }
-
-    // In order to avoid having to check whether to use scroll left or right
-    // we've made a decision to always scroll left a positive or negative amount.
-    scrollHeader = direction => {
-        // Number of elements we can show at a time.
-        const space = (this.hwrapper.scrollWidth / MAGIC_NUMBER) - 1;
-        // How far we're currently scrolled.
-        const currentScroll = this.headerRef.scrollLeft;
-        let amountToScroll;
-        if (direction === 'right') amountToScroll = (MAGIC_NUMBER * space) + currentScroll;
-        if (direction === 'left') amountToScroll = -(MAGIC_NUMBER * space) + currentScroll;
-        if (direction === 'left' && amountToScroll < MAGIC_NUMBER) amountToScroll = 0;
-        // Actual scrolling function.
-        this.headerRef.scroll({ left: amountToScroll, behavior: 'smooth' });
-        this.setState({ leftScroll: amountToScroll, rightBorder: this.state.maxRightBorder - space * MAGIC_NUMBER});
-    }
 
     mouseOverControls = () => {
         this.setState({ moused: true });
@@ -59,12 +43,19 @@ class TabbedBlock extends React.Component {
         this.setState({ moused: false });
     }
 
+    // In order to avoid having to check whether to use scroll left or right
+    // we've made a decision to always scroll left a positive or negative amount.
+    scrollHeader = direction => {
+        const left = move(direction, this.headerRef.scrollLeft, this.headerRef.clientWidth);
+        this.headerRef.scroll({ left , behavior: 'smooth' });
+        this.setState({ leftScroll: left });
+    }
     render() {
         return (
-            <div className='tabbed-block'>
+            <div className='tabbed-block-root'>
                 <div className='tabbed-block-container'>
-                    <div className='tabbed-block-wrapper'>
-                        <div className='tabbed-block-wrapper-col'>
+                    <div className='tabbed-block'>
+                        <div className='tabbed-block-scroll-wrapper'>
                             <div
                                 ref={hwrap => this.hwrapper = hwrap}
                                 className='tabbed-block-header-wrapper'
@@ -77,8 +68,15 @@ class TabbedBlock extends React.Component {
                                     activate={this.makeActive}
                                     getBlockHeaderRef={this.getHeaderRef}
                                 />
-                                <TabControls display={this.state.moused} left={this.state.leftScroll} right={this.state.rightBorder} scroll={this.scrollHeader}/>
+                                <TabControls
+                                    display={this.state.moused}
+                                    left={this.state.leftScroll}
+                                    right={this.state.rightMax}
+                                    scroll={this.scrollHeader}
+                                />
                             </div>
+                        </div>
+                        <div className='tabbed-block-content'>
                             <TabbedBlockBody data={this.props.data.content} active={this.state.active} />
                         </div>
                     </div>
@@ -90,13 +88,14 @@ class TabbedBlock extends React.Component {
 
 TabbedBlock.propTypes = {
     data: PropTypes.shape({
-        headers: PropTypes.arrayOf(PropTypes.shape({
+        header: PropTypes.arrayOf(PropTypes.shape({
             name: PropTypes.string,
             index: PropTypes.number
         })),
         content: PropTypes.arrayOf(PropTypes.shape({
             header: PropTypes.number,
-            content: PropTypes.any
+            text: PropTypes.string,
+            image: PropTypes.any
         }))
     })
 }
